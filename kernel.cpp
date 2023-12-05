@@ -1,6 +1,7 @@
 
 #include "types.h"
 #include "gdt.h"
+#include "interrupts.h"
 
 void printf(char* str)
 {
@@ -52,6 +53,10 @@ extern "C" void johnbeautyMain(void* multiboot_structure, uint32_t magicnumber)
 {
     printf("john beauty!\n");
     printf("ta de hua yao fang zai xin li");
+	
     GlobalDescriptorTable gdt;
+	InterruptManager interrupts(&gtd);
+	
+	interrupts.Activate();
     while (1);    
 }
