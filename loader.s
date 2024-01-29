@@ -8,7 +8,7 @@
     .long CHECKSUM
 
 .section .text
-.extern johnbeautyMain
+.extern beautyMain
 .extern callConstructors
 .global loader
 
@@ -19,7 +19,7 @@ loader:
 
     push %eax
     push %ebx
-    call johnbeautyMain
+    call beautyMain
 
 _stop:
     cli

@@ -3,14 +3,19 @@
 
 .extern _ZN16InterruptManager15handleInterruptEht
 
+.global _ZN16InterruptManager22IgnoreInterruptRequestEv
+
+
 .macro HandleException num
-.global _ZN16InterruptManager26handleInterruptRequest\num\()Ev
+.global _ZN16InterruptManager26HandleInterruptRequest\num\()Ev
+_ZN16InterruptManager26HandleInterruptRequest\num\()Ev:
 	movb $\num, (interruptnumber)
 	jmp int_bottom
 .endm
 
 .macro HandleInterruptRequest num
-.global _ZN16InterruptManager26handleInterruptRequest\num\()Ev
+.global _ZN16InterruptManager26HandleInterruptRequest\num\()Ev
+_ZN16InterruptManager26HandleInterruptRequest\num\()Ev:
 	movb $\num + IRQ_BASE, (interruptnumber)
 	jmp int_bottom
 .endm
@@ -38,7 +43,9 @@ int_bottom:
 	popl %es
 	popl %ds
 	popa
-	
+
+_ZN16InterruptManager22IgnoreInterruptRequestEv:
+
 	iret
 
 .data

@@ -3,7 +3,7 @@
 #include "gdt.h"
 #include "interrupts.h"
 
-void printf(char* str)
+void printf(const char* str)
 {
     static uint16_t*  VideoMemory = (uint16_t*)0xb8000;
     
@@ -55,7 +55,7 @@ extern "C" void beautyMain(void* multiboot_structure, uint32_t magicnumber)
     printf("ta de hua yao fang zai xin li");
 	
     GlobalDescriptorTable gdt;
-	InterruptManager interrupts(&gtd);
+	InterruptManager interrupts(&gdt);
 	
 	interrupts.Activate();
     while (1);    

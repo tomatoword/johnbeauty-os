@@ -1,5 +1,6 @@
 #include "types.h"
 #include "port.h"
+#include "gdt.h"
 
 #ifndef __INTERUPTS_H
 #define __INTERUPTS_H
@@ -26,13 +27,13 @@
 				uint32_t base;
 			} __attribute__((packed));
 			
-			static void SetInterruptDescriptorTableEntry{
+			static void SetInterruptDescriptorTableEntry(
 				uint8_t interruptNumber,
 				uint16_t codeSegmentSelectorOffset,
 				void (*handler)(),
 				uint8_t DescriptorPrivilegeLevel,
 				uint8_t DescriptorType
-			};
+			);
 		
 		
 		public:
@@ -48,4 +49,4 @@
 			static void HandleInterruptRequest0x01();
 	};
 
-#endif;
+#endif
